@@ -20,10 +20,6 @@ spring:
 
 logging:
   level:
-    org:
-      hibernate:
-        SQL: DEBUG
-#      type:
-#        descriptor:
-#          sql:
-#            BasicBinder: TRACE
+    org.hibernate.SQL: DEBUG
+#      display query parameters
+#      type.descriptor.sql.BasicBinder: TRACE
