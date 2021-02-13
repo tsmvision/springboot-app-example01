@@ -1,0 +1,43 @@
+header {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border-radius: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #FFFFFF;
+
+    .pageTitle {
+        margin-bottom: 30px;
+    }
+
+    .categoryBlock {
+        margin-bottom: 20px;
+
+       .categoryTitle {
+             margin-bottom: 5px;
+            //  font-weight: bold;
+             font-size: 20px;
+        }
+        .buttonGroup {
+            display: flex;
+            flex-direction: row;
+    
+            button {
+                margin-right: 5px;
+                min-width: 150px;
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+
+footer {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
