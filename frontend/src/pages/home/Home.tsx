@@ -2,21 +2,23 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import styles from "./Home.module.scss";
 import { Link } from "react-router-dom";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
+import CardBlock from "../../components/cardBlock/CardBlock";
 
 const Home = () => {
   return (
-    <div>
-      <header>
-        <Link to="/">Home</Link>
-        <h2>Hello Shop</h2>
-      </header>
+    <>
+      <Header />
       <main>
-        <Card body className={styles.card}>
+        <CardBlock>
           <div className={styles.pageTitle}>Hello Shop</div>
           <div className={styles.categoryBlock}>
             <div className={styles.categoryTitle}>For Members</div>
             <div className={styles.buttonGroup}>
-              <Button variant="secondary">Register Member</Button>
+              <Link to="/register-member">
+                <Button variant="secondary">Register Member</Button>
+              </Link>
               <Button variant="secondary">Member List</Button>
             </div>
           </div>
@@ -34,12 +36,11 @@ const Home = () => {
               <Button variant="info">Order list</Button>
             </div>
           </div>
-        </Card>
+        </CardBlock>
       </main>
-      <footer> Hello Shop 2021</footer>
-    </div>
+      <Footer />
+    </>
   );
 };
-//
 
 export default Home;
