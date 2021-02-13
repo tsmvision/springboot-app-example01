@@ -28,4 +28,9 @@ public class Category {
 
     @OneToMany(mappedBy = "parent")
     private List<Category> children = new ArrayList<>();
+
+    public void addChildCategory(Category category) {
+        children.add(category);
+        category.setParent(this);
+    }
 }
