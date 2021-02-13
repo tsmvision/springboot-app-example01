@@ -1,5 +1,6 @@
 package com.example.backend.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "orders")
 public class Order {
 
@@ -48,5 +49,33 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem: orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    // cancel order
+    public void cancel() {
+        if (delivery.getDeliveryStatus() == DeliveryStatus.COMPLETED) {
+            throw new IllegalStateException("cancellation is not available because the item already delivered");
+        }
+
+        setStatus(OrderStatus.CANCEL);
+        orderItems.forEach(OrderItem::cancel);
+    }
+
+    public int getTotalPrice() {
+        return  orderItems.stream()
+                    .mapToInt(OrderItem::getTotalPrice)
+                    .sum();
     }
 }
