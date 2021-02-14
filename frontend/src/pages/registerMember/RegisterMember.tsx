@@ -4,6 +4,7 @@ import Footer from "../../components/footer/Footer";
 import CardBlock from "../../components/cardBlock/CardBlock";
 import { Form, Button } from "react-bootstrap";
 import styles from "./RegisterMember.module.scss";
+import { connect } from "react-redux";
 
 interface MemberInfo {
   name: string;
@@ -79,4 +80,8 @@ const RegisterMember = () => {
   );
 };
 
-export default RegisterMember;
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(RegisterMember);
