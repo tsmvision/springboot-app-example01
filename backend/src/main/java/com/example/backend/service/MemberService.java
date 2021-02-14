@@ -1,11 +1,10 @@
 package com.example.backend.service;
 
+import com.example.backend.domain.Address;
 import com.example.backend.domain.Member;
+import com.example.backend.dto.MemberDto;
 import com.example.backend.repository.MemberRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -40,5 +39,12 @@ public class MemberService {
 
     public Optional<Member> findById(Long id) {
         return memberRepository.findById(id);
+    }
+
+    public void save(MemberDto memberDto) {
+        Member member = new Member(memberDto.getName(),
+                new Address(memberDto.getCity(), memberDto.getStreet(), memberDto.getZipcode())
+        );
+        Member savedMember = memberRepository.save(member);
     }
 }

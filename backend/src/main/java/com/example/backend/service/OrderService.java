@@ -10,8 +10,6 @@ import com.example.backend.repository.MemberRepository;
 import com.example.backend.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
