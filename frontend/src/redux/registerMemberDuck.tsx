@@ -1,57 +1,68 @@
 import axios from "axios";
 
-const START_REGISTER_MEMBER = "START_REGISTER_MEMBER";
-const SUCCESS_REGISTER_MEMBER = "SUCCESS_REGISTER_MEMBER";
-const FAIL_REGISTER_MEMBER = "ERROR_REGISTER_MEMBER";
-const FINISH_REGISTER_MEMBER = "FINISH_REGISTER_MEMBER";
+export const START_REGISTER_MEMBER = "START_REGISTER_MEMBER";
+export const SUCCESS_REGISTER_MEMBER = "SUCCESS_REGISTER_MEMBER";
+export const FAIL_REGISTER_MEMBER = "ERROR_REGISTER_MEMBER";
+export const FINISH_REGISTER_MEMBER = "FINISH_REGISTER_MEMBER";
 
 // create actions
-const startRegisterMember = () => {
+export const startRegisterMember = () => {
   return {
     type: START_REGISTER_MEMBER,
   };
 };
 
-interface Action {
+export interface Action {
   type: string;
   payload: any;
 }
 
-interface MemberInput {
+export interface MemberInput {
   name: string;
   street: string;
   city: string;
   zipcode: string;
 }
 
-const successRegsiterMember = (data: any) => {
+export const successRegsiterMember = (data: any) => {
   return {
     type: SUCCESS_REGISTER_MEMBER,
     payload: data,
   };
 };
 
-const failRegisterMember = (errorMessage: string) => {
+export const failRegisterMember = (errorMessage: string) => {
   return {
     type: FAIL_REGISTER_MEMBER,
     payload: errorMessage,
   };
 };
 
-const finishRegisterMember = () => {
+export const finishRegisterMember = () => {
   return {
     type: FINISH_REGISTER_MEMBER,
   };
 };
 
 // create action creators
-const postMemberToRegister = (memberInput: MemberInput) => {
+export const postMemberToRegister = ({
+  name,
+  street,
+  city,
+  zipcode,
+}: MemberInput) => {
   return async (dispatch: any, getState: any) => {
     try {
-      const response = axios.post("http://localhost:8080/api/member");
+      const response = await axios.post("http://localhost:8080/api/members", {
+        name,
+        street,
+        city,
+        zipcode,
+      });
+
       dispatch(successRegsiterMember(response));
     } catch (error) {
-      dispatch(failRegisterMember(error));
+      dispatch(failRegisterMember(error.message));
     }
   };
 };
@@ -65,6 +76,7 @@ const initialState = {
     city: "",
     zipcode: "",
   },
+  isSubmit: false,
   error: null,
 };
 
@@ -75,17 +87,24 @@ export default (state = initialState, action: Action) => {
     case SUCCESS_REGISTER_MEMBER:
       return {
         data: {
-          ...action.payload,
+          ...initialState.data,
         },
-        error: undefined,
+        isSubmit: true,
+        error: null,
       };
     case FAIL_REGISTER_MEMBER:
       return {
         ...initialState,
+        isSubmit: true,
         error: action.payload,
       };
     case FAIL_REGISTER_MEMBER:
-      return state;
+      return {
+        ...initialState,
+        data: {
+          ...initialState.data,
+        },
+      };
     default:
       return state;
   }

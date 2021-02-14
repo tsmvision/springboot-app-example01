@@ -6,6 +6,8 @@ import com.example.backend.dto.MemberDto;
 import com.example.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +35,20 @@ public class MemberService {
         }
     }
 
-    public List<Member> getMembers() {
-        return memberRepository.findAll();
+    public List<MemberDto> getMembers() {
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        List<Member> members = memberRepository.findAll();
+        for (Member member : members) {
+            memberDtoList.add(
+                    new MemberDto(
+                            member.getId(),
+                            member.getUsername(),
+                            member.getAddress().getCity(),
+                            member.getAddress().getStreet(),
+                            member.getAddress().getZipcode())
+            );
+        }
+        return memberDtoList;
     }
 
     public Optional<Member> findById(Long id) {
