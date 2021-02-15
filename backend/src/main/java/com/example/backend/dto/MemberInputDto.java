@@ -7,7 +7,7 @@ import lombok.Setter;
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter @Setter
-public class MemberDto {
+public class MemberInputDto {
 
     private Long id;
     private String name;
@@ -15,7 +15,7 @@ public class MemberDto {
     private String street;
     private String zipcode;
 
-    public MemberDto(Long id, String name, String city, String street, String zipcode) {
+    public MemberInputDto(Long id, String name, String city, String street, String zipcode) {
         this.id = id;
         this.name = name;
         this.city = city;

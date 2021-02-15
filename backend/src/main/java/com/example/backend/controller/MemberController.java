@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.MemberDto;
+import com.example.backend.dto.MemberInputDto;
 import com.example.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
 @RestController
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class MemberController {
 
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<MemberDto> createNewMember(@RequestBody MemberDto memberDto) {
+    public ResponseEntity<MemberInputDto> createNewMember(@RequestBody MemberInputDto memberDto) {
         log.info("MemberController: createNewMember");
 
         memberService.save(memberDto);
@@ -29,7 +29,7 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MemberDto>> getMembers() {
+    public ResponseEntity<List<MemberInputDto>> getMembers() {
         log.info("MemberController: getMembers");
 
         return new ResponseEntity<>(memberService.getMembers(), HttpStatus.OK);

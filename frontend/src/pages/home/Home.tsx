@@ -27,7 +27,9 @@ const Home = () => {
           <div className={styles.categoryBlock}>
             <div className={styles.categoryTitle}>For Product</div>
             <div className={styles.buttonGroup}>
-              <Button variant="dark">Register Item</Button>
+              <Link to="/register-item">
+                <Button variant="dark">Register Item</Button>
+              </Link>
               <Button variant="dark">Item List</Button>
             </div>
           </div>

@@ -80,7 +80,7 @@ const initialState = {
   error: null,
 };
 
-export default (state = initialState, action: Action) => {
+const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case START_REGISTER_MEMBER:
       return state;
@@ -98,7 +98,7 @@ export default (state = initialState, action: Action) => {
         isSubmit: true,
         error: action.payload,
       };
-    case FAIL_REGISTER_MEMBER:
+    case FINISH_REGISTER_MEMBER:
       return {
         ...initialState,
         data: {
@@ -109,3 +109,5 @@ export default (state = initialState, action: Action) => {
       return state;
   }
 };
+
+export default reducer;

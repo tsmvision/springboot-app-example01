@@ -2,7 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.domain.Address;
 import com.example.backend.domain.Member;
-import com.example.backend.dto.MemberDto;
+import com.example.backend.dto.MemberInputDto;
 import com.example.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,12 +35,12 @@ public class MemberService {
         }
     }
 
-    public List<MemberDto> getMembers() {
-        List<MemberDto> memberDtoList = new ArrayList<>();
+    public List<MemberInputDto> getMembers() {
+        List<MemberInputDto> memberDtoList = new ArrayList<>();
         List<Member> members = memberRepository.findAll();
         for (Member member : members) {
             memberDtoList.add(
-                    new MemberDto(
+                    new MemberInputDto(
                             member.getId(),
                             member.getUsername(),
                             member.getAddress().getCity(),
@@ -55,7 +55,7 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
-    public void save(MemberDto memberDto) {
+    public void save(MemberInputDto memberDto) {
         Member member = new Member(memberDto.getName(),
                 new Address(memberDto.getCity(), memberDto.getStreet(), memberDto.getZipcode())
         );

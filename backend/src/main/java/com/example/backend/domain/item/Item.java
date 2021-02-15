@@ -32,6 +32,12 @@ public abstract class Item {
     @OneToMany(mappedBy = "item")
     private List<CategoryItem> categoryItems;
 
+    public Item(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
     /**
      * increase stock
      * @param quantity

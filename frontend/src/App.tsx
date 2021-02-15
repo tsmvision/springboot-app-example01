@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import RegisterMember from "./pages/registerMember/RegisterMember";
 import MemberList from "./pages/memberList/MemberList";
+import RegisterBook from "./pages/registerItem/RegisterBook";
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
         </Route>
         <Route exact path="/member-list">
           <MemberList />
+        </Route>
+        <Route exact path="/register-item">
+          <RegisterBook />
         </Route>
         <Route exact path="/">
           <Home />
