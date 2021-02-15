@@ -19,7 +19,9 @@ const Home = () => {
               <Link to="/register-member">
                 <Button variant="secondary">Register Member</Button>
               </Link>
-              <Button variant="secondary">Member List</Button>
+              <Link to="/member-list">
+                <Button variant="secondary">Member List</Button>
+              </Link>
             </div>
           </div>
           <div className={styles.categoryBlock}>
