@@ -30,7 +30,9 @@ const Home = () => {
               <Link to="/register-item">
                 <Button variant="dark">Register Item</Button>
               </Link>
-              <Button variant="dark">Item List</Button>
+              <Link to="/item-list">
+                <Button variant="dark">Item List</Button>
+              </Link>
             </div>
           </div>
           <div className={styles.categoryBlock}>

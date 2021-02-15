@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
 @RestController
 @RequestMapping("/api/items/books")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class BookController {
 
     private final ItemService itemService;

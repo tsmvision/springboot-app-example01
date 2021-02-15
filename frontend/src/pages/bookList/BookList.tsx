@@ -3,28 +3,27 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import CardBlock from "../../components/cardBlock/CardBlock";
 import { Table } from "react-bootstrap";
-import styles from "./MemberList.module.scss";
+import styles from "./BookList.module.scss";
 import { connect } from "react-redux";
-import { getMemberList } from "../../redux/memberListDuck";
+import { getBookList } from "../../redux/bookListDuck";
 
-const MemberListRow = ({ id, name, city, street, zipcode }: any) => {
+const MemberListRow = ({ id, name, price, stockQuantity }: any) => {
   return (
     <tr>
       <td>{id}</td>
       <td>{name}</td>
-      <td>{city}</td>
-      <td>{street}</td>
-      <td>{zipcode}</td>
+      <td>{price}</td>
+      <td>{stockQuantity}</td>
     </tr>
   );
 };
 
-const MemberList = ({ memberListObject, getData }: any) => {
+const BookList = ({ bookListObject, getData }: any) => {
   useEffect(() => {
     getData();
   }, []);
 
-  const { data } = memberListObject;
+  const { data } = bookListObject;
   return (
     <div>
       <Header />
@@ -34,21 +33,18 @@ const MemberList = ({ memberListObject, getData }: any) => {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>City</th>
-              <th>Street</th>
-              <th>Zip Code</th>
+              <th>Price</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
             {data.length > 0 &&
-              data.map(({ id, name, city, street, zipcode }: any, index: number) => (
+              data.map(({ id, name, price, stockQuantity }: any) => (
                 <MemberListRow
                   id={id}
                   name={name}
-                  city={city}
-                  street={street}
-                  zipcode={zipcode}
-                  key={id + index}
+                  city={price}
+                  street={stockQuantity}
                 />
               ))}
           </tbody>
@@ -61,14 +57,14 @@ const MemberList = ({ memberListObject, getData }: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    memberListObject: state.memberList,
+    bookListObject: state.bookList,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: () => dispatch(getMemberList()),
+    getData: () => dispatch(getBookList()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MemberList);
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
