@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.BookDto;
 import com.example.backend.service.ItemService;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,5 +30,11 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getBooks() {
         log.info("ItemController: getBooks()");
         return new ResponseEntity<>(itemService.getBooks(), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) throws NotFoundException {
+        itemService.updateBook(bookDto);
+        return new ResponseEntity<>(bookDto, HttpStatus.OK);
     }
 }
