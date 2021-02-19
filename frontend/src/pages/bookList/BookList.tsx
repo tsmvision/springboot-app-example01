@@ -6,11 +6,17 @@ import { Table } from "react-bootstrap";
 import styles from "./BookList.module.scss";
 import { connect } from "react-redux";
 import { getBookList } from "../../redux/book/bookListDuck";
-import {Button } from 'react-bootstrap';
-import EditModal from './EditModal';
+import { Button } from "react-bootstrap";
+import EditModal from "./EditModal";
 
-const MemberListRow = ({ id, name, price, stockQuantity, author, isbn }: any) => {
-
+const MemberListRow = ({
+  id,
+  name,
+  price,
+  stockQuantity,
+  author,
+  isbn,
+}: any) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -27,29 +33,30 @@ const MemberListRow = ({ id, name, price, stockQuantity, author, isbn }: any) =>
           price,
           stockQuantity,
           author,
-          isbn
+          isbn,
         }}
       />
-    <tr>
-      <td>{id}</td>
-      <td>{name}</td>
-      <td>{price}</td>
-      <td>{stockQuantity}</td>
-      <td>{author}</td>
-      <td>{isbn}</td>
-      <td><Button onClick={handleShow}>Edit</Button></td>
-    </tr>
+      <tr>
+        <td>{id}</td>
+        <td>{name}</td>
+        <td>{price}</td>
+        <td>{stockQuantity}</td>
+        <td>{author}</td>
+        <td>{isbn}</td>
+        <td>
+          <Button onClick={handleShow}>Edit</Button>
+        </td>
+      </tr>
     </>
   );
 };
 
-const BookList = ({ bookListObject, getData }: any) => {
-
+const BookList = ({ bookList, getData }: any) => {
   useEffect(() => {
     getData();
   }, []);
 
-  const { data } = bookListObject;
+  const { data } = bookList;
   return (
     <div>
       <Header />
@@ -68,16 +75,22 @@ const BookList = ({ bookListObject, getData }: any) => {
           </thead>
           <tbody>
             {data.length > 0 &&
-              data.map(({ id, name, price, stockQuantity, author, isbn }: any) => (
-                <MemberListRow
-                  id={id}
-                  name={name}
-                  price={price}
-                  stockQuantity={stockQuantity}
-                  author={author}
-                  isbn={isbn}
-                />
-              ))}
+              data.map(
+                (
+                  { id, name, price, stockQuantity, author, isbn }: any,
+                  index: number
+                ) => (
+                  <MemberListRow
+                    id={id}
+                    name={name}
+                    price={price}
+                    stockQuantity={stockQuantity}
+                    author={author}
+                    isbn={isbn}
+                    key={index + id}
+                  />
+                )
+              )}
           </tbody>
         </Table>
       </CardBlock>
@@ -88,7 +101,7 @@ const BookList = ({ bookListObject, getData }: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    bookListObject: state.bookList,
+    bookList: state.bookList,
   };
 };
 

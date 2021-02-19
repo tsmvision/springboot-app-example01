@@ -5,12 +5,18 @@ import com.example.backend.domain.Member;
 import com.example.backend.domain.Order;
 import com.example.backend.domain.OrderItem;
 import com.example.backend.domain.item.Item;
+import com.example.backend.dto.OrderRequestDto;
+import com.example.backend.dto.OrderResponseDto;
 import com.example.backend.repository.ItemRepository;
 import com.example.backend.repository.MemberRepository;
 import com.example.backend.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +57,14 @@ public class OrderService {
     }
 
     // search
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//
-//    }
+    public List<OrderResponseDto> findOrders(OrderSearch orderSearch) {
+        List<Order> orders = orderRepository.findAll(orderSearch);
+       return orders
+               .stream()
+               .map(
+                       order -> new OrderResponseDto(
+                                order.getId(),
+                                order.getMember().getUsername())
+               ).collect(Collectors.toList());
+    }
 }

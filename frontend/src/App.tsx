@@ -6,6 +6,7 @@ import RegisterMember from "./pages/registerMember/RegisterMember";
 import MemberList from "./pages/memberList/MemberList";
 import RegisterBook from "./pages/registerItem/RegisterBook";
 import BookList from './pages/bookList/BookList';
+import RegisterOrder from './pages/registerOrder/RegisterOrder';
 
 const App = () => {
   return (
@@ -22,6 +23,9 @@ const App = () => {
         </Route>
         <Route exact path="/item-list">
           <BookList />
+        </Route>
+        <Route exact path="/register-order">
+          <RegisterOrder />
         </Route>
         <Route exact path="/">
           <Home />

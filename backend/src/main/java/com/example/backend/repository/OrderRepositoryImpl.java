@@ -13,9 +13,9 @@ import static com.example.backend.domain.QMember.member;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class OrderRepositoryImpl implements OrderRepositoryCustom{
+public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
-    JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public List<Order> findAll(OrderSearch orderSearch) {
@@ -25,7 +25,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .where(
                         statusEq(orderSearch.getOrderStatus()),
                         nameLike(orderSearch.getMemberName())
-                ).fetch();
+                )
+        .fetch();
     }
 
     private BooleanExpression statusEq(OrderStatus orderStatus) {

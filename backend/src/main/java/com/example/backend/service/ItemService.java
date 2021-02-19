@@ -19,15 +19,14 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     public void saveBook(BookDto itemDto) {
-
-        itemRepository.save(
-                new Book(
-                        itemDto.getName(),
-                        itemDto.getPrice(),
-                        itemDto.getStockQuantity(),
-                        itemDto.getAuthor(),
-                        itemDto.getIsbn())
-                );
+            itemRepository.save(
+                    new Book(
+                            itemDto.getName(),
+                            itemDto.getPrice(),
+                            itemDto.getStockQuantity(),
+                            itemDto.getAuthor(),
+                            itemDto.getIsbn())
+            );
     }
 
     public void updateBook(BookDto itemDto) throws NotFoundException {
@@ -39,6 +38,8 @@ public class ItemService {
         else {
             Book book = (Book) item.get();
             book.setName(itemDto.getName());
+            // TODO: avoid set as much as possible.
+            // TODO: refactoer code without set. create new method
             book.setPrice(itemDto.getPrice());
             book.setStockQuantity(itemDto.getStockQuantity());
             book.setAuthor(itemDto.getAuthor());
